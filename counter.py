@@ -30,7 +30,32 @@ def update_counter(file_name, reset=False):
     >>> update_counter('blah2.txt')
     2
     """
-    pass
+    # Note: Looked at classmates' code to help make this.
+    if exists(file_name) and not reset:
+        # The file has already been made and the reset button hasn't been pressed.
+        file = open(file_name, 'rb+')
+        # Open the file in reading mode
+        counter = load(file)
+        counter += 1
+        # Tell the counter to add one because the file was opened again.
+        file.close
+        return counter
+        # Close the file and tell us the number on the counter.
+    else:
+        file = open(file_name, 'wb')
+        # The file hasn't been declared or has been reset, rewrite it or make a new one.
+        counter = 1
+        # The file has been opened once so the count is one.
+        dump(counter, file)
+        # dumping it is what saves the pickle.
+        file.close
+        return counter
+
+    # pickle.load
+    # check if file exists
+    # if doesn't, create file
+    # initialize counter variable
+
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
